@@ -37,10 +37,12 @@ Inclui rotas para listar todos os usuários, listar todos os cards e buscar por 
    Inicie o servidor:
    ```
 
-bash
-Copiar código
-npm run start
-Teste os endpoints no Postman ou navegador:
+- bash
+- Copiar código
+- npm run start
+
+
+**Teste os endpoints no Postman ou navegador:**
 
 http://localhost:3000/users
 
