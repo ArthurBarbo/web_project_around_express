@@ -15,5 +15,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`ta on porta:${PORT}`);
+  console.log(`o Servidor está hospedado na porta: ${PORT}`);
 });

@@ -5,6 +5,14 @@
   },
   "extends": "airbnb-base",
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "always",
+        "jsx": "always"
+      }
+    ],
     "no-underscore-dangle": "off",
     "no-console": "off",
     "linebreak-style": "off"
