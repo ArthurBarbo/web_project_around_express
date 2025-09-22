@@ -1,53 +1,60 @@
 # Projeto 15 - Mini API Express - Around Us
 
-## 📖 Descrição do Projeto
+## 📖 Descrição
 
-Este projeto consiste em criar uma **API simples** utilizando **Node.js** e **Express**.  
-A API disponibiliza dados de usuários e cards, que podem ser consumidos por um front-end, semelhante ao projeto "EUA Afora" do curso.  
-Inclui rotas para listar todos os usuários, listar todos os cards e buscar por ID, além de tratamento de erros 404 para rotas inexistentes ou IDs não encontrados.
+API completa usando Node.js, Express e MongoDB, permitindo gerenciar usuários e cards.  
+Funcionalidades incluem criação, listagem, atualização, deleção e curtidas em cards, além de atualização de perfil e avatar de usuários.
 
----
+## 🛠 Tecnologias
 
-## 🛠 Tecnologias e Técnicas Utilizadas
-
-- **Node.js** – Ambiente de execução JavaScript no servidor.
-- **Express** – Framework para criação de APIs REST.
-- **JavaScript (ES Modules)** – Uso de `import/export`.
-- **JSON** – Armazenamento temporário de dados de usuários e cards.
-- **fs + path** – Leitura de arquivos JSON no servidor.
-- **Nodemon** – Reinício automático do servidor durante o desenvolvimento.
-- **Tratamento de erros 404** – Para rotas e IDs não encontrados.
-
----
+Node.js, Express, MongoDB + Mongoose, JavaScript (ES Modules), middleware para usuário logado (`req.user._id`), validação de campos obrigatórios e URLs, tratamento de erros 400 e 404, Nodemon para desenvolvimento.
 
 ## ✅ Funcionalidades
 
-- `GET /users` → Lista todos os usuários.
-- `GET /users/:id` → Retorna um usuário específico pelo ID.
-- `GET /cards` → Lista todos os cards.
-- `GET /cards/:id` → Retorna um card específico pelo ID.
-- Rotas não existentes retornam JSON `{ "message": "A solicitação não foi encontrada" }`.
+### Usuários
 
-## ⚡ Instruções para Rodar o Projeto
+- `GET /users` → Lista todos os usuários
+- `GET /users/:userId` → Retorna um usuário pelo `_id`
+- `POST /users` → Cria um novo usuário com `{ "name": "Nome do usuário", "about": "Sobre o usuário", "avatar": "URL da imagem" }`
+- `PATCH /users/me` → Atualiza perfil (`name`, `about`)  
+  Exemplo: `{ "name": "Novo nome", "about": "Nova descrição" }`
+- `PATCH /users/me/avatar` → Atualiza avatar (`avatar`)  
+  Exemplo: `{ "avatar": "URL da nova imagem" }`
 
-1. Clone o repositório.
-2. Instale as dependências:
-   ```bash
-   npm install
-   Inicie o servidor:
-   ```
+### Cards
 
-- bash
-- Copiar código
-- npm run start
+- `GET /cards` → Lista todos os cards
+- `GET /cards/:cardId` → Retorna um card pelo `_id`
+- `POST /cards` → Cria um novo card (`name`, `link`) com `owner = req.user._id`  
+  Exemplo: `{ "name": "Nome do card", "link": "URL da imagem" }`
+- `DELETE /cards/:cardId` → Deleta um card pelo `_id`
+- `PUT /cards/:cardId/likes` → Adiciona like do usuário logado
+- `DELETE /cards/:cardId/likes` → Remove like do usuário logado
 
+### Erros
 
-**Teste os endpoints no Postman ou navegador:**
+- Rotas inexistentes retornam `{ "message": "A solicitação não foi encontrada" }`
+- IDs inválidos ou não encontrados retornam mensagens apropriadas (`ID inválido` ou `Cartão/Usuário não encontrado`)
 
-http://localhost:3000/users
+## ⚡ Como Rodar
 
-http://localhost:3000/users/:id
+1. Clone o repositório: `git clone <URL_DO_REPOSITORIO>`
+2. Instale dependências: `npm install`
+3. Inicie o servidor: `npm run start`
 
-http://localhost:3000/cards
+### Teste os endpoints no Postman ou navegador:
 
-http://localhost:3000/cards/:id
+**Usuários**:  
+`GET http://localhost:3000/users`  
+`GET http://localhost:3000/users/:userId`  
+`POST http://localhost:3000/users`  
+`PATCH http://localhost:3000/users/me`  
+`PATCH http://localhost:3000/users/me/avatar`
+
+**Cards**:  
+`GET http://localhost:3000/cards`  
+`GET http://localhost:3000/cards/:cardId`  
+`POST http://localhost:3000/cards`  
+`DELETE http://localhost:3000/cards/:cardId`  
+`PUT http://localhost:3000/cards/:cardId/likes`  
+`DELETE http://localhost:3000/cards/:cardId/likes`
