@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const patternURL = /^https?:\/\/(www\.)?[\w\-._~:/?#[\]@!$&'()*+,;=]+$/;
+const patternURL = /^https?:\/\/[^\s]+$/;
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -21,4 +21,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model("User", userSchema);

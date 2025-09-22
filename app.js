@@ -23,17 +23,16 @@ mongoose
   .catch((err) => console.log("Erro ao conectar ao MongoDB:", err));
 //ate aqui
 const PORT = process.env.PORT || 3000;
-
-app.use("/cards", cards);
-app.use("/users", users);
-
 app.use((req, res, next) => {
   req.user = {
-    _id: "68d046b6cd5bbb24348d8cbb", // cole o _id do usuário teste criado no passo anterior
+    _id: "68d1a7c67f1a6be84dff5bee",
   };
 
   next();
 });
+
+app.use("/cards", cards);
+app.use("/users", users);
 
 app.use((req, res) => {
   res.status(404).json({ message: "A solicitação não foi encontrada" });

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const patternURL = /^https?:\/\/(www\.)?[\w\-._~:/?#[\]@!$&'()*+,;=]+$/;
+const patternURL = /^https?:\/\/[^\s]+$/;
 
 const cardSchema = new mongoose.Schema({
   name: {
