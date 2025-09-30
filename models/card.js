@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-const patternURL = /^https?:\/\/[^\s]+$/;
+import mongoose from 'mongoose';
+
+export const patternURL = /^https?:\/\/[^\s]+$/;
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -12,7 +13,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: function (v) {
+      validator(v) {
         return patternURL.test(v);
       },
       message: (props) => `${props.value} não é um link válido!`,
@@ -21,17 +22,17 @@ const cardSchema = new mongoose.Schema({
 
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       default: [],
     },
   ],
   createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("Card", cardSchema);
+export default mongoose.model('Card', cardSchema);

@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import User from '../models/user.js';
 
 export const getUsers = (req, res) => {
   User.find({})
@@ -11,13 +11,11 @@ export const getUserById = (req, res) => {
 
   User.findById(userId)
     .then((user) => {
-      if (!user)
-        return res.status(404).send({ message: "usuário não encontrado" });
+      if (!user) return res.status(404).send({ message: 'usuário não encontrado' });
       res.send(user);
     })
     .catch((err) => {
-      if (err.name === "CastError")
-        return res.status(400).send({ message: "ID inválido" });
+      if (err.name === 'CastError') return res.status(400).send({ message: 'ID inválido' });
       res.status(500).send({ message: err.message });
     });
 };
@@ -25,7 +23,7 @@ export const getUserById = (req, res) => {
 export const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   if (!name || !about || !avatar) {
-    return res.status(400).json({ message: "Faltam campos obrigatórios" });
+    return res.status(400).json({ message: 'Faltam campos obrigatórios' });
   }
 
   User.create({ name, about, avatar })
@@ -39,11 +37,11 @@ export const updateUser = (req, res) => {
   User.findByIdAndUpdate(
     req.user._id,
     { name, about },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   )
     .then((user) => {
       if (!user) {
-        return res.status(404).json({ message: "Usuário não encontrado" });
+        return res.status(404).json({ message: 'Usuário não encontrado' });
       }
       res.json(user);
     })
@@ -56,11 +54,11 @@ export const updateAvatar = (req, res) => {
   User.findByIdAndUpdate(
     req.user._id,
     { avatar },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   )
     .then((user) => {
       if (!user) {
-        return res.status(404).json({ message: "Usuário não encontrado" });
+        return res.status(404).json({ message: 'Usuário não encontrado' });
       }
       res.json(user);
     })
